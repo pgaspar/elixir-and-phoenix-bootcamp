@@ -15,4 +15,8 @@ defmodule Cards do
   def hello do
     :world
   end
+
+  def shuffle(deck) do
+    Enum.shuffle(deck)
+  end
 end
