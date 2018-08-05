@@ -37,4 +37,17 @@ defmodule Cards do
   def contains?(deck, card) do
     Enum.member?(deck, card)
   end
+
+  @doc """
+  Given a deck, returns a tuple with a hand of hand_size and
+  the remaining deck.
+
+  ## Examples
+
+      iex> Cards.deal(["Ace", "Two", "Three"], 2)
+      {["Ace", "Two"], ["Three"]}
+  """
+  def deal(deck, hand_size) do
+    Enum.split(deck, hand_size)
+  end
 end

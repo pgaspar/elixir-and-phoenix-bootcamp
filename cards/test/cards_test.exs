@@ -19,4 +19,11 @@ defmodule CardsTest do
     assert Cards.contains?(deck, "Ace") == true
     assert Cards.contains?(deck, "Queen") == false
   end
+
+  test "deals a hand" do
+    deck = ["Ace", "Two", "Three", "Four"]
+    { hand, deck } = Cards.deal(deck, 2)
+    assert hand == ["Ace", "Two"]
+    assert deck == ["Three", "Four"]
+  end
 end
