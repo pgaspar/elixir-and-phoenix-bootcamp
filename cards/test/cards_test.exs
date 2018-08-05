@@ -11,4 +11,10 @@ defmodule CardsTest do
     deck = ["Ace", "Two", "Three"]
     assert Cards.shuffle(deck) == ["Two", "Ace", "Three"]
   end
+
+  test "checks if deck contains card" do
+    deck = ["Ace", "Two", "Three"]
+    assert Cards.contains?(deck, "Ace") == true
+    assert Cards.contains?(deck, "Queen") == false
+  end
 end
