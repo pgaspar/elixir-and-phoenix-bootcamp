@@ -39,3 +39,24 @@ To reload your code within the shell: `recompile`
 
 https://hexdocs.pm/elixir/
 
+# String Interpolation
+
+```
+"#{value} of #{suit}"
+```
+
+# Tuples
+
+It's like an array, where every element has a "special meaning".
+
+For example: `{[The Hand], [The rest of the deck]}`
+
+```
+{["Ace", "Two"], ["Three", "Four", "Five"]}
+
+{ hand, rest_of_deck } = {["Ace", "Two"], ["Three", "Four", "Five"]}
+```
+
+# Pattern Matching
+
+It's Elixir's replacement to variable assignment.
