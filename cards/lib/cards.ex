@@ -10,13 +10,9 @@ defmodule Cards do
   Generates a deck of cards.
   """
   def create_deck do
-    cards = for suit <- @deck_suits do
-      for value <- @deck_values do
-        "#{value} of #{suit}"
-      end
+    for suit <- @deck_suits, value <- @deck_values do
+      "#{value} of #{suit}"
     end
-
-    List.flatten(cards)
   end
 
   @doc """
