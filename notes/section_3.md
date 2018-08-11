@@ -2,7 +2,7 @@
 
 Open `mix.exs` and add dependencies to the `deps` function:
 
-```
+```elixir
 defp deps do
 [
   {:ex_doc, "~> 0.12"}
@@ -18,7 +18,7 @@ mix deps.get
 
 # Documentation
 
-```
+```elixir
 defmodule Cards do
   @moduledoc """
   Module documentation

@@ -41,7 +41,7 @@ https://hexdocs.pm/elixir/
 
 # String Interpolation
 
-```
+```elixir
 "#{value} of #{suit}"
 ```
 
@@ -51,7 +51,7 @@ It's like an array, where every element has a "special meaning".
 
 For example: `{[The Hand], [The rest of the deck]}`
 
-```
+```elixir
 {["Ace", "Two"], ["Three", "Four", "Five"]}
 
 { hand, rest_of_deck } = {["Ace", "Two"], ["Three", "Four", "Five"]}
