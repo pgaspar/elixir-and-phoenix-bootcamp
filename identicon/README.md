@@ -1,21 +1,19 @@
 # Identicon
 
-**TODO: Add description**
+Utility that, given a string, generates an image similar to Github's default avatars. The same string always generates the same image.
 
-## Installation
+## Format
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `identicon` to your list of dependencies in `mix.exs`:
+Identicons consist of a 5x5 square grid. Each square is 50px tall and wide, making the whole image 250px by 250px.
 
-```elixir
-def deps do
-  [
-    {:identicon, "~> 0.1.0"}
-  ]
-end
-```
+The images are vertically symmetrical.
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/identicon](https://hexdocs.pm/identicon).
+## Process
 
+* Start with a string
+* Compute its MD5 hash
+* Get a list of numbers from the hash
+* Pick a color
+* Build the grid of squares
+* Convert grid into image
+* Save image
