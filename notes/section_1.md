@@ -56,7 +56,3 @@ For example: `{[The Hand], [The rest of the deck]}`
 
 { hand, rest_of_deck } = {["Ace", "Two"], ["Three", "Four", "Five"]}
 ```
-
-# Pattern Matching
-
-It's Elixir's replacement to variable assignment.
