@@ -6,9 +6,10 @@ defmodule CardsTest do
     deck = Cards.create_deck
     assert Enum.member?(deck, "Ace of Spades") == true
     assert Enum.member?(deck, "Two of Diamonds") == true
+    assert length(deck) == 48
   end
 
-  test "shuffles a deck" do
+  test "shuffling a deck randomizes it" do
     :rand.seed(:exsplus, {1, 2, 3})
     deck = ["Ace", "Two", "Three"]
     assert Cards.shuffle(deck) == ["Two", "Ace", "Three"]
