@@ -68,4 +68,13 @@ defmodule Cards do
       { :error, _ } -> "File does not exist"
     end
   end
+
+  @doc """
+  Creates a deck, shuffles it and deals it (given a hand_size).
+  """
+  def create_hand(hand_size) do
+    Cards.create_deck
+    |> Cards.shuffle
+    |> Cards.deal(hand_size)
+  end
 end
