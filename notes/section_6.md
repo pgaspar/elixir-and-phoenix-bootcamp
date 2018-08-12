@@ -55,8 +55,18 @@ iex> Enum.map([1, 2, 3], &duplicate/1)
 
 There's no built-in lib for this - we're going to use [Erlang's egd](http://erlang.org/documentation/doc-6.1/lib/percept-0.8.9/doc/html/egd.html).
 
+Install it with:
+
+```elixir
+{:egd, github: "erlang/egd"}
+```
+
 Functions we're going to use:
 * `egd.create()`
 * `egd.filledRectangle(image, point, point, color)`
+* `egd.color(color)`
+* `egd.render(image)`
 
 Top left of the image is `(0, 0)`.
+
+Egd is interesting in that it seems to modify the images we pass in to its functions, instead of returning new objects.
