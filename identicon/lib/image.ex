@@ -3,5 +3,5 @@ defmodule Identicon.Image do
   A Struct representing the data used by Identicon.
   """
 
-  defstruct hex: nil, color: nil
+  defstruct hex: nil, color: nil, grid: nil
 end
