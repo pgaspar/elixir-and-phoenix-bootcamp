@@ -3,6 +3,15 @@ defmodule Identicon do
   Documentation for Identicon.
   """
 
+  @doc """
+  Main Identicon function. Generates and saves an identicon image to disk,
+  based on the value of the `input` string.
+
+  ## Examples:
+
+      iex> Identicon.main("banana")
+      :ok
+  """
   def main(input) do
     input
     |> hash_input
