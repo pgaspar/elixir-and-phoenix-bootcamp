@@ -11,6 +11,7 @@ defmodule Identicon do
     |> filter_odd_squares
     |> build_pixel_map
     |> draw_image
+    |> save_image(input)
   end
 
   @doc """
@@ -137,5 +138,12 @@ defmodule Identicon do
     end
 
     :egd.render(image)
+  end
+
+  @doc """
+  Saves the `image` to disk, using the `input` string as the filename.
+  """
+  def save_image(image, input) do
+    File.write("images/#{input}.png", image)
   end
 end
