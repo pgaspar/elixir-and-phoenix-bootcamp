@@ -21,3 +21,13 @@ iex> %Identicon.Image{hex: []}
 ```
 
 Structs enforce that the only properties that can exist are the ones defined when defining the struct.
+
+# Updating a Struct
+
+```elixir
+iex> image = %Identicon.Image{hex: [1, 2, 3]}
+%Identicon.Image{hex: [1, 2, 3]}
+
+iex> %Identicon.Image{image | color: {0, 150, 255}}
+%Identicon.Image{hex: [1, 2, 3], color: {0, 150, 255}}
+```
