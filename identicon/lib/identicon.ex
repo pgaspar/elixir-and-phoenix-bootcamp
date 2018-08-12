@@ -9,6 +9,7 @@ defmodule Identicon do
     |> pick_color
     |> build_grid
     |> filter_odd_squares
+    |> build_pixel_map
   end
 
   @doc """
@@ -81,7 +82,7 @@ defmodule Identicon do
 
   @doc """
   Removes odd squares from an `Identicon.Image`'s grid.
-  Returns an `Identicon.Image` an updated `grid` property.
+  Returns an `Identicon.Image` with an updated `grid` property.
 
   ## Examples:
 
@@ -95,5 +96,31 @@ defmodule Identicon do
     end
 
     %Identicon.Image{image | grid: grid}
+  end
+
+  @doc """
+  Generates a set of `(x, y)` coordinates for both the top left
+  and bottom right points of every tuple on an `Identicon.Image`'s grid.
+  Returns an `Identicon.Image` with `hex`, `color`, `grid` and `pixel_map`.
+
+  ## Examples:
+
+      iex> image = %Identicon.Image{hex: [114, 179, 2, 191, 41, 122, 34, 138, 117, 115, 1, 35, 239, 239, 124, 65], color: {114, 179, 2}, grid: [{114, 0},{2, 2},{114, 4},{122, 7},{34, 10},{138, 11},{138, 13},{34, 14},{124, 22}]}
+      iex> Identicon.build_pixel_map(image)
+      %Identicon.Image{hex: [114, 179, 2, 191, 41, 122, 34, 138, 117, 115, 1, 35, 239, 239, 124, 65], color: {114, 179, 2}, grid: [{114, 0},{2, 2},{114, 4},{122, 7},{34, 10},{138, 11},{138, 13},{34, 14},{124, 22}]}
+      %Identicon.Image{hex: [114, 179, 2, 191, 41, 122, 34, 138, 117, 115, 1, 35, 239, 239, 124, 65], color: {114, 179, 2}, grid: [{114, 0},{2, 2},{114, 4},{122, 7},{34, 10},{138, 11},{138, 13},{34, 14},{124, 22}], pixel_map: [{{0, 0}, {50, 50}}, {{100, 0}, {150, 50}}, {{200, 0}, {250, 50}}, {{100, 50}, {150, 100}}, {{0, 100}, {50, 150}}, {{50, 100}, {100, 150}}, {{150, 100}, {200, 150}}, {{200, 100}, {250, 150}}, {{100, 200}, {150, 250}}]}
+  """
+  def build_pixel_map(%Identicon.Image{grid: grid} = image) do
+    pixel_map = Enum.map grid, fn {_, index} ->
+      horizontal = rem(index, 5) * 50
+      vertical = div(index, 5) * 50
+
+      top_left = {horizontal, vertical}
+      bottom_right = {horizontal + 50, vertical + 50}
+
+      {top_left, bottom_right}
+    end
+
+    %Identicon.Image{image | pixel_map: pixel_map}
   end
 end

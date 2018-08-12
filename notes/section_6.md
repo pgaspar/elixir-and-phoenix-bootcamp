@@ -50,3 +50,13 @@ iex> Enum.map([1, 2, 3], &duplicate/1)
 ```
 
 `&duplicate/1` is a pointer to the function `duplicate` with 1 argument. It's similar to how you can `[1,2,3].map(&:upcase)` in Ruby.
+
+# Image manipulation
+
+There's no built-in lib for this - we're going to use [Erlang's egd](http://erlang.org/documentation/doc-6.1/lib/percept-0.8.9/doc/html/egd.html).
+
+Functions we're going to use:
+* `egd.create()`
+* `egd.filledRectangle(image, point, point, color)`
+
+Top left of the image is `(0, 0)`.
