@@ -39,9 +39,7 @@ defmodule Identicon do
       iex> Identicon.pick_color(image)
       %Identicon.Image{hex: [114, 179, 2, 191, 41, 122, 34, 138, 117, 115, 1, 35, 239, 239, 124, 65], color: {114, 179, 2}}
   """
-  def pick_color(image) do
-    # [r, g, b | _] = image.hex
-    %Identicon.Image{hex: [r, g, b | _]} = image
+  def pick_color(%Identicon.Image{hex: [r, g, b | _]} = image) do
     %Identicon.Image{image | color: {r, g, b}}
   end
 end
