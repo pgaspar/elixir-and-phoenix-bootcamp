@@ -1,3 +1,5 @@
+require Integer
+
 defmodule Identicon do
   @moduledoc """
   Documentation for Identicon.
@@ -8,6 +10,7 @@ defmodule Identicon do
     |> hash_input
     |> pick_color
     |> build_grid
+    |> filter_odd_squares
   end
 
   @doc """
@@ -76,5 +79,23 @@ defmodule Identicon do
   """
   def mirror_row([first, second | _] = row) do
     row ++ [second, first]
+  end
+
+  @doc """
+  Removes odd squares from an `Identicon.Image`'s grid.
+  Returns an `Identicon.Image` an updated `grid` property.
+
+  ## Examples:
+
+      iex> image = %Identicon.Image{hex: [114, 179, 2, 191, 41, 122, 34, 138, 117, 115, 1, 35, 239, 239, 124, 65], color: {114, 179, 2}, grid: [{114, 0},{179, 1},{2, 2},{179, 3},{114, 4},{191, 5},{41, 6},{122, 7},{41, 8},{191, 9},{34, 10},{138, 11},{117, 12},{138, 13},{34, 14},{115, 15},{1, 16},{35, 17},{1, 18},{115, 19},{239, 20},{239, 21},{124, 22},{239, 23},{239, 24}]}
+      iex> Identicon.filter_odd_squares(image)
+      %Identicon.Image{hex: [114, 179, 2, 191, 41, 122, 34, 138, 117, 115, 1, 35, 239, 239, 124, 65], color: {114, 179, 2}, grid: [{114, 0},{2, 2},{114, 4},{122, 7},{34, 10},{138, 11},{138, 13},{34, 14},{124, 22}]}
+  """
+  def filter_odd_squares(%Identicon.Image{grid: grid} = image) do
+    filtered_grid =
+      grid
+      |> Enum.filter(fn {value, _} -> Integer.is_even(value) end)
+
+    %Identicon.Image{image | grid: filtered_grid}
   end
 end
