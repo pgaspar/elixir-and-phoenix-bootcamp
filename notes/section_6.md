@@ -31,3 +31,22 @@ iex> image = %Identicon.Image{hex: [1, 2, 3]}
 iex> %Identicon.Image{image | color: {0, 150, 255}}
 %Identicon.Image{hex: [1, 2, 3], color: {0, 150, 255}}
 ```
+
+# Concatenating Arrays
+
+```elixir
+iex> [1, 2, 3] ++ [4, 5]
+[1, 2, 3, 4, 5]
+```
+
+# Enum.map
+
+```elixir
+iex> Enum.map([1, 2, 3], fn x -> x * 2 end)
+[2, 4, 6]
+
+iex> Enum.map([1, 2, 3], &duplicate/1)
+[2, 4, 6]
+```
+
+`&duplicate/1` is a pointer to the function `duplicate` with 1 argument. It's similar to how you can `[1,2,3].map(&:upcase)` in Ruby.

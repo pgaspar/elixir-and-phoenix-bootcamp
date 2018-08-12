@@ -7,6 +7,7 @@ defmodule Identicon do
     input
     |> hash_input
     |> pick_color
+    |> build_grid
   end
 
   @doc """
@@ -41,5 +42,34 @@ defmodule Identicon do
   """
   def pick_color(%Identicon.Image{hex: [r, g, b | _]} = image) do
     %Identicon.Image{image | color: {r, g, b}}
+  end
+
+  @doc """
+  Builds a grid for the passed `Identicon.Image` object.
+  Returns an `Identicon.Image` with `hex`, `color` and `grid` properties.
+
+  ## Examples:
+
+      iex> image = %Identicon.Image{hex: [114, 179, 2, 191, 41, 122, 34, 138, 117, 115, 1, 35, 239, 239, 124, 65], color: {114, 179, 2}}
+      iex> Identicon.build_grid(image)
+      [[114, 179, 2, 179, 114], [191, 41, 122, 41, 191], [34, 138, 117, 138, 34], [115, 1, 35, 1, 115], [239, 239, 124, 239, 239]]
+  """
+  def build_grid(%Identicon.Image{hex: hex} = image) do
+    hex
+    |> Enum.chunk_every(3, 3, :discard)
+    |> Enum.map(&mirror_row/1)
+  end
+
+  @doc """
+  Mirrors a row from the image grid.
+
+  ## Examples:
+
+      iex> row = [1, 2, 3]
+      iex> Identicon.mirror_row(row)
+      [1, 2, 3, 2, 1]
+  """
+  def mirror_row([first, second | _] = row) do
+    row ++ [second, first]
   end
 end
