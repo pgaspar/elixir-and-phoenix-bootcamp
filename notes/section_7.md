@@ -21,3 +21,35 @@ $ iex -S mix phoenix.server
 # Configure database in config/dev.exs and run:
 $ mix ecto.create
 ```
+
+# View vs. Templates in Phoenix
+
+When Phoenix boots up, it looks at our `views/` folder and gets the list of all views. It gets the name of each view, minus the "View" part.
+
+It then looks at the `templates/` folder and tries to find the corresponding folder.
+
+Phoenix then picks up the names of every file in that templates folder and makes them available to render on the View, using `render("the_file.html")`.
+
+# Migrations
+
+```
+$ mix ecto.gen.migration add_topics
+```
+
+```elixir
+defmodule Discuss.Repo.Migrations.AddTopics do
+  use Ecto.Migration
+
+  def change do
+    create table(:topics) do
+      add :title, :string
+    end
+  end
+end
+```
+
+Run Migration:
+
+```
+$ mix ecto.migrate
+```
