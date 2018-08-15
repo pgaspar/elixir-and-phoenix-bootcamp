@@ -1,10 +1,12 @@
 defmodule Discuss.TopicController do
   use Discuss.Web, :controller
 
+  alias Discuss.Topic
+
   def new(conn, _params) do
-    struct = %Discuss.Topic{}
+    struct = %Topic{}
     params = %{}
-    changeset = Discuss.Topic.changeset(struct, params)
+    changeset = Topic.changeset(struct, params)
 
     render conn, "new.html"
   end
