@@ -20,4 +20,7 @@ $ iex -S mix phoenix.server
 
 # Configure database in config/dev.exs and run:
 $ mix ecto.create
+
+# Routes
+$ mix phoenix.routes
 ```

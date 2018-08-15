@@ -9,8 +9,10 @@ defmodule Discuss.TopicController do
     render conn, "new.html", changeset: changeset
   end
 
-  def create(conn, _params) do
-    # render conn, "new.html"
+  def create(conn, %{"topic" => topic}) do
+    changeset = Topic.changeset(%Topic{}, topic)
+
+    render conn, "new.html", changeset: changeset
     # redirect_to :new
   end
 end
