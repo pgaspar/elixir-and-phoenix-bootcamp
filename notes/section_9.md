@@ -76,3 +76,7 @@ When we save to the database, we save the changeset, not the struct.
 def changeset(struct, params \\ %{})
   ...
 ```
+
+# Phoenix Forms
+
+Whilst in Rails we pass model instances to the form helpers, here we pass a changeset.
