@@ -80,3 +80,12 @@ def changeset(struct, params \\ %{})
 # Phoenix Forms
 
 Whilst in Rails we pass model instances to the form helpers, here we pass a changeset.
+
+```elixir
+def new(conn, _params) do
+  changeset = Topic.changeset(%Topic{}, %{})
+  render conn, "new.html", changeset: changeset
+end
+```
+
+Phoenix has [built-in form helpers](https://hexdocs.pm/phoenix_html/Phoenix.HTML.Form.html).
