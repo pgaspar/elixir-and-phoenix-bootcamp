@@ -6,7 +6,18 @@
 * If failure, show form / show error notice
 
 ```elixir
+def create(conn, %{"topic" => topic}) do
+  changeset = Topic.changeset(%Topic{}, topic)
 
+  case Repo.insert(changeset) do
+    {:ok, post} ->
+      conn
+      |> put_flash(:info, "Topic Created 👍")
+      |> redirect(to: topic_path(conn, :index))
+    {:error, changeset} ->
+      render conn, "new.html", changeset: changeset
+  end
+end
 ```
 
 # Ecto
@@ -46,4 +57,12 @@ SELECT t0."id", t0."title" FROM "topics" AS t0 []
     title: "Testing"
   }
 ]
+```
+
+# Redirecting in Phoenix
+
+```elixir
+conn
+|> put_flash(:info, "Topic Created 👍")
+|> redirect(to: topic_path(conn, :index))
 ```
