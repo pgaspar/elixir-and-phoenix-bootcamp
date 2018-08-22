@@ -90,3 +90,20 @@ conn
 | Edit | `topic_path(conn, :edit, ID)` |
 | Update | `topic_path(conn, :create, ID)` |
 | Delete | `topic_path(conn, :delete, ID)` |
+
+# Phoenix Route Helper
+
+```elixir
+resources "/topics", TopicController
+
+resources "/topics", TopicController, only: [:index]
+resources "/topics", TopicController, except: [:index]
+```
+
+# Delete resource link
+
+You need to specify `method: :delete` when creating a delete link.
+
+```elixir
+<%= link "Delete", to: topic_path(@conn, :delete, topic), method: :delete %>
+```
