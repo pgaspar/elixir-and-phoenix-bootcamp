@@ -13,3 +13,25 @@ Callback phase:
 * User logged in
 
 We're going to use a helper library: [Ueberauth](https://github.com/ueberauth/ueberauth)
+
+# Querying the Repo
+
+`find_by` equivalent (returns `nil`):
+
+```elixir
+Repo.get_by(Post, title: "My Post")
+```
+
+# Authentication flow
+
+* User Oauths with Github
+* We insert record into DB
+* Database record gets an ID
+* Put ID on user's cookie (that is what "signing in" means)
+
+In Phoenix we interact with cookies through Sessions.
+
+```elixir
+conn
+|> put_session(:user_id, user.id)
+```
