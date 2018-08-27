@@ -75,6 +75,16 @@ plug Discuss.Plugs.RequireAuth
 plug Discuss.Plugs.RequireAuth when action in [:new]
 ```
 
+Function plugs are defined within controllers:
+
+```elixir
+plug :check_something
+
+defp check_something do
+  # ...
+end
+```
+
 [Cheatsheet](https://devhints.io/phoenix-conn).
 
 # Elixir Condition blocks
