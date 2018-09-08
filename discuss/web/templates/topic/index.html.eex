@@ -5,7 +5,7 @@
     <li class="collection-item">
       <%= topic.title %>
 
-      <%= if @conn.assigns.user.id == topic.user_id do %>
+      <%= if @conn.assigns.user && @conn.assigns.user.id == topic.user_id do %>
         <div class="right">
           <%= link "Edit", to: topic_path(@conn, :edit, topic) %>
           |
