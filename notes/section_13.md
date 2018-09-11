@@ -56,3 +56,21 @@ The `socket` object is like our `conn` object on our controllers.
 # Get number from "comments:5"
 "comments:" <> topic_id
 ```
+
+# Poison encoder
+
+The typical error:
+
+```
+(Poison.EncodeError) unable to encode value: {nil, "comments"}
+```
+
+This means we need to serialize the comments struct to JSON. Poison is the library that encodes something to JSON and it fails to encode some of the fields from our struct. To make it work:
+
+```elixir
+defmodule Comment do
+  # ...
+  @derive {Poison.Encoder, only: [:content]}
+  # ...
+end
+```
