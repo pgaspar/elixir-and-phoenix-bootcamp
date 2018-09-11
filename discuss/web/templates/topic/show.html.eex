@@ -1,3 +1,7 @@
 <h5><%= @topic.title %></h5>
 
-<button>Ping!</button>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    window.createSocket(<%= @topic.id %>);
+  });
+</script>
