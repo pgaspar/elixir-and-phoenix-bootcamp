@@ -49,3 +49,10 @@ This acts a bit like a router declaration - we forward every message named `comm
 [Reference here](https://hexdocs.pm/phoenix/1.2.5/Phoenix.Channel.html#callbacks).
 
 The `socket` object is like our `conn` object on our controllers.
+
+# Pattern matching on string
+
+```elixir
+# Get number from "comments:5"
+"comments:" <> topic_id
+```
