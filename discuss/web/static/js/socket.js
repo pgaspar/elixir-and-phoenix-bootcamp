@@ -87,9 +87,17 @@ function renderComment(event) {
 }
 
 function commentTemplate(comment) {
+  let email = 'Anonymous';
+  if (comment.user) {
+    email = comment.user.email;
+  }
+
   return `
     <li class="collection-item">
       ${comment.content}
+      <div class="secondary-content">
+        ${email}
+      </div>
     </li>
   `;
 }
