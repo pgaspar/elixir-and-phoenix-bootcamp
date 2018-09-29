@@ -98,3 +98,51 @@ function renderComment(event) {
   document.querySelector('.collection').innerHTML += renderedComment;
 }
 ```
+
+# Authentication in Sockets
+
+**Server:**
+
+* Generates a unique token and adds it to the layout
+
+**Browser:**
+
+* Gets the layout HTML
+* Javascript initializes the socket, sending the unique token: `new Socket('/socket', {params: {token: window.userToken}});`
+
+**Server:**
+
+* Server verifies token and adds the user to the socket's assigns
+
+# Authentication Token
+
+Create the token on the layout's head, for example:
+
+```html
+<script>
+  <%= if @conn.assigns.user do %>
+    window.userToken = '<%= Phoenix.Token.sign(Discuss.Endpoint, "key", @conn.assigns.user.id) %>';
+  <% end %>
+</script>
+```
+
+`socket.js` will have this by default:
+
+```javascript
+let socket = new Socket("/socket", {params: {token: window.userToken}})
+```
+
+See boilerplate comments on `socket.js` for more detail.
+
+On `user_socket.ex`:
+
+```elixir
+def connect(%{"token" => token}, socket) do
+  case Phoenix.Token.verify(socket, "key", token) do
+    {:ok, user_id} ->
+      {:ok, assign(socket, :user_id, user_id)}
+    {:error, _reason} ->
+      :error
+  end
+end
+```
