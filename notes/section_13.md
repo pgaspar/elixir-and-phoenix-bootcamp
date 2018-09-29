@@ -74,3 +74,27 @@ defmodule Comment do
   # ...
 end
 ```
+
+# Broadcasting socket updates
+
+In the Channel's `handle_in` function, call:
+
+```elixir
+broadcast!(socket, "comments:#{socket.assigns.topic.id}:new",
+  %{comment: comment}
+)
+```
+
+You need to add an event listener on the JS side, when setting up:
+
+```javascript
+const createSocket = (topicId) => {
+  // ...
+  channel.on(`comments:${topicId}:new`, renderComment);
+}
+
+function renderComment(event) {
+  const renderedComment = commentTemplate(event.comment);
+  document.querySelector('.collection').innerHTML += renderedComment;
+}
+```

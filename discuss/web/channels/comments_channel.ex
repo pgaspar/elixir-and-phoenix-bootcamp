@@ -19,7 +19,10 @@ defmodule Discuss.CommentsChannel do
       |> Comment.changeset(%{content: content})
 
     case Repo.insert(changeset) do
-      {:ok, _topic} ->
+      {:ok, comment} ->
+        broadcast!(socket, "comments:#{socket.assigns.topic.id}:new",
+          %{comment: comment}
+        )
         {:reply, :ok, socket}
       {:error, changeset} ->
         {:reply, {:error, %{errors: changeset}}, socket}
